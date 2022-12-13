@@ -149,7 +149,7 @@ const player = new PianoPlayer(bots.map(b => b.cl));
 let file = './china.mid';
 // let file = './[Black Score] One Last Time ~ Z-Doc R..mid'
 
-if (!true) {
+if (true) {
     setTimeout(() => {
         player.loadFile(file);
     }, 3000);
