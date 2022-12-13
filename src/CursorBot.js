@@ -27,8 +27,8 @@ class CursorBot {
             if (this.l >= 0.75 || this.l <= 0.25) {
                 this.lvel = -this.lvel;
             }
-            this.cl.emit('set user');
-        }, 1000 / 10);
+            // this.cl.emit('set user');
+        }, 1000 / 5);
 
         this.follow;
     }

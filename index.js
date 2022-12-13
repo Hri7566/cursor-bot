@@ -1,11 +1,12 @@
 const { CursorBot } = require('./src/CursorBot');
 const WebSocket = require('ws');
 
-globalThis.TOTAL_IDS = 50;
+globalThis.TOTAL_IDS = 88;
 
 let bots = [];
 
 const startDelay = 0;
+const modeDelay = 10000;
 
 for (let i = 1; i <= TOTAL_IDS; i++) {
     bots.push(new CursorBot(i));
@@ -15,21 +16,26 @@ let i = 0;
 for (const bot of bots) {
     setTimeout(() => {
         bot.start();
-        bot.cl.setChannel('✧𝓓𝓔𝓥 𝓡𝓸𝓸𝓶✧');
+        // bot.cl.setChannel('✧𝓓𝓔𝓥 𝓡𝓸𝓸𝓶✧');
+        bot.cl.setChannel('Kewk');
     }, i * startDelay);
     i++;
 }
 
 let happened = false;
 
-let currentMode = 0;
+let currentMode = -1;
 let modes = [
     'circle',
+    'circle2',
     'dvd',
     'sine',
-    'circle2',
+    'fullsine',
     'figure8',
-    'cosmic'
+    'cosmic',
+    'heart',
+    'line',
+    'line2',
 ]
 
 function switchMode() {
@@ -65,6 +71,22 @@ function switchMode() {
                 cl.cursor.velocity.x = 1;
                 cl.cursor.velocity.y = 1;
                 break;
+            case 'heart':
+                cl.cursor.velocity.x = 0;
+                cl.cursor.velocity.y = 0;
+                break;
+            case 'fullsine':
+                cl.cursor.velocity.x = 2;
+                cl.cursor.velocity.y = 2;
+                break;
+            case 'line':
+                cl.cursor.velocity.x = 0;
+                cl.cursor.velocity.y = 0;
+                break;
+            case 'line2':
+                cl.cursor.velocity.x = 0;
+                cl.cursor.velocity.y = 0;
+                break;
         }
 
         cl.cursor.mode = mode;
@@ -93,4 +115,23 @@ setInterval(() => {
 
 setInterval(() => {
     switchMode();
-}, 5000);
+}, modeDelay);
+
+switchMode();
+
+const { PianoPlayer } = require('./src/PianoPlayer');
+
+const player = new PianoPlayer(bots.map(b => b.cl));
+
+let file = './china.mid';
+
+// setTimeout(() => {
+//     player.loadFile(file);
+// }, 3000);
+
+player.player.on('endOfFile', () => {
+    player.player.stop();
+    setTimeout(() => {
+        player.loadFile(file);
+    }, 3000);
+});

@@ -26,7 +26,7 @@ class Cursor {
         this.ot = Date.now();
         this.dt = 0;
 
-        this.offset = this.id / (TOTAL_IDS / 10);
+        this.offset = (this.id / TOTAL_IDS) * 360;
 
         this.followPos = new Vector2(50, 50);
 
@@ -47,7 +47,8 @@ class Cursor {
         this.calc = new Vector2(50, 50);
         this.calcVel = new Vector2(1, 1);
 
-        this.mode = 'circle';
+        // this.mode = 'circle';
+        this.mode = 'line';
 
         this.size = new Vector2(20, 20);
     }
@@ -328,6 +329,36 @@ class Cursor {
                 this.calc.x = this.followPos.x + Math.sin(r) * 10;
                 this.calc.y = this.followPos.y + Math.cos(r * 3) * 10;
                 
+                break;
+            case 'heart':
+                this.angle += 0.01;
+                // this.angle += 3;
+                
+                if (this.angle + this.offset > 360) {
+                    this.angle -= 360;
+                }
+
+                let ang = this.angle + this.offset;
+
+                this.calc.x = ((16 * (Math.sin(ang) ** 3)) / 2) + this.followPos.x;
+                this.calc.y = -((13 * (Math.cos(ang))) - (5 * (Math.cos(ang * 2))) - (Math.cos(ang * 4))) - 5 + this.followPos.y;
+                break;
+            case 'fullsine':
+                this.angle += this.velocity.x;
+                if (this.angle > 360) {
+                    this.angle -= 360;
+                }
+                r = (this.angle + (this.id * 5)) * (Math.PI / 180);
+                this.calc.x = (this.id / TOTAL_IDS) * 100;
+                this.calc.y = this.followPos.y + Math.sin(r) * 50;
+                break;
+            case 'line':
+                this.calc.x = this.offset / 2;
+                this.calc.y = this.calc.x;
+                break;
+            case 'line2':
+                this.calc.x = this.offset / 2;
+                this.calc.y = (-this.calc.x + 100);
                 break;
         }
 
