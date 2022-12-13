@@ -47,8 +47,7 @@ class Cursor {
         this.calc = new Vector2(50, 50);
         this.calcVel = new Vector2(1, 1);
 
-        // this.mode = 'circle';
-        this.mode = 'line';
+        this.mode = 'raycast';
 
         this.size = new Vector2(20, 20);
     }
@@ -353,12 +352,240 @@ class Cursor {
                 this.calc.y = this.followPos.y + Math.sin(r) * 50;
                 break;
             case 'line':
-                this.calc.x = this.offset / 2;
-                this.calc.y = this.calc.x;
+                this.angle += this.velocity.x;
+                if (this.angle > 360 * 1000) {
+                    this.angle -= 360 * 1000;
+                }
+                r = (this.angle + (this.id * 5)) * (Math.PI / 180);
+                this.calc.x = (this.offset / 2) + (Math.cos(r) * 5)/2;
+                this.calc.y = this.calc.x + (Math.sin(r) * 5);
                 break;
             case 'line2':
-                this.calc.x = this.offset / 2;
-                this.calc.y = (-this.calc.x + 100);
+                this.angle += this.velocity.x;
+                if (this.angle > 360 * 1000) {
+                    this.angle -= 360 * 1000;
+                }
+                r = (this.angle + (this.id * 5)) * (Math.PI / 180);
+                this.calc.x = (this.offset / 2) + (Math.cos(r) * 5)/2;
+                this.calc.y = (-(this.calc.x + (Math.sin(r) * 5))) + 100;
+                break;
+            case 'circle3':
+                // this.followPos.x += this.velocity.x;
+                // this.followPos.y += this.velocity.y;
+
+                // if (this.followPos.x > SCREEN_SIDES.RIGHT || this.followPos.x < SCREEN_SIDES.LEFT) {
+                //     this.velocity.x = -this.velocity.x;
+                // }
+
+                // if (this.followPos.y > SCREEN_SIDES.BOTTOM || this.followPos.y < SCREEN_SIDES.TOP) {
+                //     this.velocity.y = -this.velocity.y;
+                // }
+
+                // this.angle += this.id / 2;
+                this.angle += 100 * this.dt;
+                // this.angle += 3;
+                
+                if (this.angle > 360) {
+                    this.angle -= 360;
+                }
+
+                // this.angle2 += 0.25;
+                this.angle2 += 100 * this.dt;
+                // this.angle2 += Math.random() * 15;
+
+                // if (this.xflip) {
+                //     if (this.angle2 < 90) {
+                //         this.angle2 += 1;
+                //     }
+                // } else {
+                //     if (this.angle2 > -90) {
+                //         this.angle2 -= 1;
+                //     }
+                // }
+                
+                if (this.angle2 > 360) {
+                    this.angle2 -= 360;
+                }
+
+                if (this.angle2 < 0) {
+                    this.angle2 += 360;
+                }
+
+                // this.angle3 += this.velocity.x;
+                // this.angle3 += 2;
+                // this.angle3 += Math.random() * 5;
+                
+                if (this.angle3 > 360) {
+                    this.angle3 -= 360;
+                }
+
+                // this.angle4 += 2;
+                
+                if (this.angle4 > 360) {
+                    this.angle4 -= 360;
+                }
+
+                this.angle5 += 3;
+                
+                if (this.angle5 > 360) {
+                    this.angle5 -= 360;
+                }
+
+                this.angle6 += 1;
+                
+                if (this.angle6 > 360) {
+                    this.angle6 -= 360;
+                }
+
+                r = this.angle * (Math.PI / 180);
+                r2 = this.angle2 * (Math.PI / 180);
+                r3 = this.angle3 * (Math.PI / 180);
+                r4 = this.angle4 * (Math.PI / 180);
+                r5 = this.angle5 * (Math.PI / 180);
+                r6 = this.angle6 * (Math.PI / 180);
+
+                // this.followPos.x = 25 // + (Math.sin(r4) * 10);
+                // this.followPos.y = 50 // + (Math.cos(r5) * 5);
+
+                // this.velocity.x += this.acceleration.x;
+                // this.velocity.y += this.acceleration.y;
+                // // this.velocity.y += this.g;
+                // this.position.x += this.velocity.x * this.dt;
+                // this.position.y += this.velocity.y * this.dt;
+
+                // if (this.position.y > SCREEN_SIDES.BOTTOM) {
+                //     this.velocity.y -= 15;
+                // }
+
+                // if (this.position.y < SCREEN_SIDES.TOP) {
+                //     this.velocity.y += 15;
+                // }
+                
+                // if (this.position.x > SCREEN_SIDES.RIGHT) {
+                //     this.velocity.x -= 15;
+                // }
+
+                // if (this.position.x < SCREEN_SIDES.LEFT) {
+                //     this.velocity.x += 15;
+                // }
+
+                // this.position.x += 0.1;
+                // this.position.y = this.followPos.y + (Math.sin(this.position.x / 5) * 10)
+                this.size.x = Math.sin(r2) * 20;
+                this.size.y = Math.cos(r3) * 20;
+                this.calc.x = this.followPos.x + ((Math.sin(r + this.offset) * this.size.x) / 2);
+                this.calc.y = this.followPos.y + (Math.cos(r + this.offset) * this.size.y);
+                break;
+            case 'circle4':
+                // this.followPos.x += this.velocity.x;
+                // this.followPos.y += this.velocity.y;
+
+                // if (this.followPos.x > SCREEN_SIDES.RIGHT || this.followPos.x < SCREEN_SIDES.LEFT) {
+                //     this.velocity.x = -this.velocity.x;
+                // }
+
+                // if (this.followPos.y > SCREEN_SIDES.BOTTOM || this.followPos.y < SCREEN_SIDES.TOP) {
+                //     this.velocity.y = -this.velocity.y;
+                // }
+
+                // this.angle += this.id / 2;
+                this.angle += -(300 * this.dt);
+                // this.angle += 3;
+                
+                if (this.angle > 360) {
+                    this.angle -= 360;
+                }
+
+                // this.angle2 += 0.25;
+                this.angle2 += 50 * this.dt;
+                // this.angle2 += Math.random() * 15;
+
+                // if (this.xflip) {
+                //     if (this.angle2 < 90) {
+                //         this.angle2 += 1;
+                //     }
+                // } else {
+                //     if (this.angle2 > -90) {
+                //         this.angle2 -= 1;
+                //     }
+                // }
+                
+                if (this.angle2 > 360) {
+                    this.angle2 -= 360;
+                }
+
+                if (this.angle2 < 0) {
+                    this.angle2 += 360;
+                }
+
+                // this.angle3 += this.velocity.x;
+                // this.angle3 += 2;
+                // this.angle3 += Math.random() * 5;
+                
+                if (this.angle3 > 360) {
+                    this.angle3 -= 360;
+                }
+
+                // this.angle4 += 2;
+                
+                if (this.angle4 > 360) {
+                    this.angle4 -= 360;
+                }
+
+                this.angle5 += 3;
+                
+                if (this.angle5 > 360) {
+                    this.angle5 -= 360;
+                }
+
+                this.angle6 += 1;
+                
+                if (this.angle6 > 360) {
+                    this.angle6 -= 360;
+                }
+
+                r = this.angle * (Math.PI / 180);
+                r2 = this.angle2 * (Math.PI / 180);
+                r3 = this.angle3 * (Math.PI / 180);
+                r4 = this.angle4 * (Math.PI / 180);
+                r5 = this.angle5 * (Math.PI / 180);
+                r6 = this.angle6 * (Math.PI / 180);
+
+                // this.followPos.x = 25 // + (Math.sin(r4) * 10);
+                // this.followPos.y = 50 // + (Math.cos(r5) * 5);
+
+                // this.velocity.x += this.acceleration.x;
+                // this.velocity.y += this.acceleration.y;
+                // // this.velocity.y += this.g;
+                // this.position.x += this.velocity.x * this.dt;
+                // this.position.y += this.velocity.y * this.dt;
+
+                // if (this.position.y > SCREEN_SIDES.BOTTOM) {
+                //     this.velocity.y -= 15;
+                // }
+
+                // if (this.position.y < SCREEN_SIDES.TOP) {
+                //     this.velocity.y += 15;
+                // }
+                
+                // if (this.position.x > SCREEN_SIDES.RIGHT) {
+                //     this.velocity.x -= 15;
+                // }
+
+                // if (this.position.x < SCREEN_SIDES.LEFT) {
+                //     this.velocity.x += 15;
+                // }
+
+                // this.position.x += 0.1;
+                // this.position.y = this.followPos.y + (Math.sin(this.position.x / 5) * 10)
+                this.size.x = Math.sin(r2) * 20;
+                this.size.y = Math.cos(r3) * 20;
+                this.calc.x = this.followPos.x + ((Math.sin(r + this.offset) * this.size.x) / 2);
+                this.calc.y = this.followPos.y + (Math.cos(r + this.offset) * this.size.y);
+                break;
+            case 'raycast':
+                this.position.x = (this.id / TOTAL_IDS) * 100;
+                this.position.y = 50;
                 break;
         }
 

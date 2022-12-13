@@ -17,7 +17,7 @@ for (const bot of bots) {
     setTimeout(() => {
         bot.start();
         // bot.cl.setChannel('✧𝓓𝓔𝓥 𝓡𝓸𝓸𝓶✧');
-        bot.cl.setChannel('Kewk');
+        bot.cl.setChannel('uwu');
     }, i * startDelay);
     i++;
 }
@@ -36,9 +36,15 @@ let modes = [
     'heart',
     'line',
     'line2',
+    'circle3',
+    'circle4',
+    'dvd',
 ]
 
+let modeSwitch = true
+
 function switchMode() {
+    if (!modeSwitch) return;
     currentMode++;
 
     if (currentMode >= modes.length) currentMode = 0;
@@ -80,12 +86,29 @@ function switchMode() {
                 cl.cursor.velocity.y = 2;
                 break;
             case 'line':
-                cl.cursor.velocity.x = 0;
+                cl.cursor.velocity.x = 1;
                 cl.cursor.velocity.y = 0;
+                cl.cursor.angle = cl.cursor.offset;
                 break;
             case 'line2':
-                cl.cursor.velocity.x = 0;
+                cl.cursor.velocity.x = 1;
                 cl.cursor.velocity.y = 0;
+                break;
+            case 'circle3':
+                // cl.cursor.angle2 = (cl.id / TOTAL_IDS) * 360;
+                cl.cursor.angle2 = 0;
+                cl.cursor.velocity.x = 1;
+                cl.cursor.velocity.y = 1;
+                cl.cursor.angle3 = 0;
+                // cl.cursor.angle3 = (cl.id / TOTAL_IDS) * 360;
+                break;
+            case 'circle4':
+                // cl.cursor.angle2 = (cl.id / TOTAL_IDS) * 360;
+                cl.cursor.angle2 = 0;
+                cl.cursor.velocity.x = 1;
+                cl.cursor.velocity.y = 1;
+                cl.cursor.angle3 = 0;
+                // cl.cursor.angle3 = (cl.id / TOTAL_IDS) * 360;
                 break;
         }
 
@@ -124,10 +147,13 @@ const { PianoPlayer } = require('./src/PianoPlayer');
 const player = new PianoPlayer(bots.map(b => b.cl));
 
 let file = './china.mid';
+// let file = './[Black Score] One Last Time ~ Z-Doc R..mid'
 
-// setTimeout(() => {
-//     player.loadFile(file);
-// }, 3000);
+if (!true) {
+    setTimeout(() => {
+        player.loadFile(file);
+    }, 3000);
+}
 
 player.player.on('endOfFile', () => {
     player.player.stop();

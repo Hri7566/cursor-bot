@@ -19,6 +19,9 @@ class PianoPlayer {
 
             if (evt.name == 'Note on') {
                 this.startNote(keys[evt.noteName], evt.velocity / 127);
+                // let cl = this.clients[Object.values(keys).indexOf(keys[evt.noteName])];
+                // if (!cl) return;
+                // cl.sendArray([{m: 'm', x: Object.values(keys).indexOf(keys[evt.noteName]), y: (evt.velocity / 127) * 100 }])
             } else if (evt.name == 'Note off' || (evt.name == 'Note on' && evt.velocity == 0)) {
                 this.stopNote(keys[evt.noteName]);
             }
