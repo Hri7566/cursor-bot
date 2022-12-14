@@ -17,18 +17,18 @@ class CursorBot {
         this.l = 0.5;
         this.lvel = 0.01;
 
-        setInterval(() => {
-            this.h += 0.01;
-            this.s += this.svel;
-            if (this.s >= 0.75 || this.s <= 0.25) {
-                this.svel = -this.svel;
-            }
-            this.l += this.lvel;
-            if (this.l >= 0.75 || this.l <= 0.25) {
-                this.lvel = -this.lvel;
-            }
-            // this.cl.emit('set user');
-        }, 1000 / 5);
+        // setInterval(() => {
+        //     this.h += 0.01;
+        //     this.s += this.svel;
+        //     if (this.s >= 0.75 || this.s <= 0.25) {
+        //         this.svel = -this.svel;
+        //     }
+        //     this.l += this.lvel;
+        //     if (this.l >= 0.75 || this.l <= 0.25) {
+        //         this.lvel = -this.lvel;
+        //     }
+        //     this.cl.emit('set user');
+        // }, 1000 / 10);
 
         this.follow;
     }

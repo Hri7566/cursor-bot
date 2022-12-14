@@ -2,6 +2,7 @@ const { CursorBot } = require('./src/CursorBot');
 const WebSocket = require('ws');
 
 globalThis.TOTAL_IDS = 88;
+// globalThis.TOTAL_IDS = 150;
 
 let bots = [];
 
@@ -26,19 +27,19 @@ let happened = false;
 
 let currentMode = -1;
 let modes = [
-    'circle',
-    'circle2',
-    'dvd',
-    'sine',
-    'fullsine',
-    'figure8',
-    'cosmic',
-    'heart',
-    'line',
-    'line2',
-    'circle3',
-    'circle4',
-    'dvd',
+    ['circle',      10000],
+    ['circle2',     10000],
+    ['dvd',         5000],
+    ['sine',        5000],
+    ['fullsine',    5000],
+    ['figure8',     15000],
+    ['cosmic',      15000],
+    ['heart',       15000],
+    ['line',        10000],
+    ['line2',       10000],
+    ['circle3',     10000],
+    ['circle4',     10000],
+    ['dvd',         20000],
 ]
 
 let modeSwitch = true
@@ -48,7 +49,12 @@ function switchMode() {
     currentMode++;
 
     if (currentMode >= modes.length) currentMode = 0;
-    let mode = modes[currentMode];
+    let mode = modes[currentMode][0];
+
+    let time = modes[currentMode][1];
+    setTimeout(() => {
+        switchMode();
+    }, time);
 
     for (const cl of bots) {
         switch (mode) {
@@ -136,9 +142,9 @@ setInterval(() => {
     }
 }, 500);
 
-setInterval(() => {
-    switchMode();
-}, modeDelay);
+// setInterval(() => {
+//     switchMode();
+// }, modeDelay);
 
 switchMode();
 
@@ -149,7 +155,7 @@ const player = new PianoPlayer(bots.map(b => b.cl));
 let file = './china.mid';
 // let file = './[Black Score] One Last Time ~ Z-Doc R..mid'
 
-if (true) {
+if (!true) {
     setTimeout(() => {
         player.loadFile(file);
     }, 3000);
