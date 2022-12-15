@@ -18,7 +18,8 @@ for (const bot of bots) {
     setTimeout(() => {
         bot.start();
         // bot.cl.setChannel('✧𝓓𝓔𝓥 𝓡𝓸𝓸𝓶✧');
-        bot.cl.setChannel('uwu');
+        // bot.cl.setChannel('uwu');
+        bot.cl.setChannel('cursor');
     }, i * startDelay);
     i++;
 }
