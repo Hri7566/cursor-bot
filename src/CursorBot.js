@@ -8,6 +8,7 @@ class CursorBot {
         this.cl = new Client("wss://mpp.lapishusky.dev", id);
         this.cursor = new Cursor(id, 50, 50);
         this.id = id;
+		console.log(this.id);
 
         this.bindEventListeners();
 
@@ -133,14 +134,14 @@ class CursorBot {
 
     startCursorSend() {
         this.cursorSendInterval = setInterval(() => {
-            // let p = Object.values(this.cl.ppl).find(p => {
-            //     if (p._id == this.follow) return true;
-            // });
+            let p = Object.values(this.cl.ppl).find(p => {
+                if (p._id == this.follow) return true;
+            });
 
-            // if (p) {
-            //     this.cursor.followPos.x = p.x;
-            //     this.cursor.followPos.y = p.y;
-            // }
+            if (p) {
+                this.cursor.followPos.x = p.x;
+                this.cursor.followPos.y = p.y;
+            }
 
             this.cl.sendArray([{
                 m: 'm',

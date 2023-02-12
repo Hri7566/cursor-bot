@@ -202,6 +202,19 @@ class Cursor {
                 this.calc.x = (this.id / TOTAL_IDS) * 100;
                 this.calc.y = this.followPos.y + Math.sin(r) * 5;
                 break;
+			case 'tangent':
+				this.angle += this.velocity.x;
+
+				if (this.angle > 360) {
+					this.angle -= 360;
+				}
+
+				r = (this.angle + (this.id * 5)) * (Math.PI / 180);
+				
+				this.calc.x = (this.id / TOTAL_IDS) * 100;
+				this.calc.y = this.followPos.y + Math.tan(r) * 5;
+
+				break;
             case 'circle2':
                 // this.followPos.x += this.velocity.x;
                 // this.followPos.y += this.velocity.y;

@@ -40,6 +40,7 @@ class PianoPlayer {
     startNote(note, vel) {
         let cl = this.clients[Object.values(keys).indexOf(note)]
         if (!cl) return;
+		if (vel > 1) vel = 1;
         cl.startNote(note, vel);
     }
 

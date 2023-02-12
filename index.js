@@ -2,7 +2,7 @@ const { CursorBot } = require('./src/CursorBot');
 const WebSocket = require('ws');
 
 globalThis.TOTAL_IDS = 88;
-// globalThis.TOTAL_IDS = 150;
+// globalThis.TOTAL_IDS = 300;
 
 let bots = [];
 
@@ -19,7 +19,7 @@ for (const bot of bots) {
         bot.start();
         // bot.cl.setChannel('✧𝓓𝓔𝓥 𝓡𝓸𝓸𝓶✧');
         // bot.cl.setChannel('uwu');
-        bot.cl.setChannel('cursor');
+        bot.cl.setChannel('test/awkward');
     }, i * startDelay);
     i++;
 }
@@ -43,7 +43,7 @@ let modes = [
     ['dvd',         20000],
 ]
 
-let modeSwitch = true
+let modeSwitch = true;
 
 function switchMode() {
     if (!modeSwitch) return;
@@ -153,18 +153,26 @@ const { PianoPlayer } = require('./src/PianoPlayer');
 
 const player = new PianoPlayer(bots.map(b => b.cl));
 
-let file = './china.mid';
+let currentFile = 0;
+let files = [
+	// './Hill.mid',
+	// './Sonic1_-_Green_Hill_Zone.mid',
+	// './china.mid',
+	// './Slider.mid',
+	'./[Black Score] One Last Time ~ Z-Doc R..mid'
+];
 // let file = './[Black Score] One Last Time ~ Z-Doc R..mid'
 
-if (!true) {
+// if (!true) {
     setTimeout(() => {
-        player.loadFile(file);
+        player.loadFile(files[currentFile]);
     }, 3000);
-}
+// }
 
 player.player.on('endOfFile', () => {
-    player.player.stop();
+	player.player.stop();
+	currentFile++;
     setTimeout(() => {
-        player.loadFile(file);
+        player.loadFile(files[currentFile]);
     }, 3000);
 });
